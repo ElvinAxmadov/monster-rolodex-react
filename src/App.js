@@ -5,6 +5,7 @@ import "./App.css";
 
 const App = () => {
   const [searchField, setSearchField] = useState("");
+  const [title, setTitle] = useState("");
   const [monsters, setMonsters] = useState([]);
   const [filteredMonsters, setfilteredMonsters] = useState(monsters);
 
@@ -18,6 +19,10 @@ const App = () => {
     const searchFieldString = event.target.value.toLocaleLowerCase();
     setSearchField(searchFieldString);
   };
+  const onTitleChange = (event) => {
+    const searchFieldString = event.target.value.toLocaleLowerCase();
+    setTitle(searchFieldString);
+  };
 
   useEffect(() => {
     const newFilteredMonsters = monsters.filter((monster) => {
@@ -26,14 +31,19 @@ const App = () => {
     setfilteredMonsters(newFilteredMonsters);
   }, [monsters, searchField]);
 
-
   return (
     <div className="App">
-      <h1 className="app-title"> Ryan Gosling</h1>
+      <h1 className="app-title">{title}</h1>
       <SearchBox
         className="monsters-search-box"
         onChangeHandler={onSearchChange}
         placeholder="Search monsters"
+      />
+      <br />
+      <SearchBox
+        className="title-search-box"
+        onChangeHandler={onTitleChange}
+        placeholder="Set title"
       />
       <CardList monsters={filteredMonsters} />
     </div>
